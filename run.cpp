@@ -1,8 +1,13 @@
 #include "main.cpp"
+#include "hrtime.h"
 int step;
 long double steps, endtime;
 
 int main(){
+    
+    double start_time, end_time;
+    
+    start_time = getElapsedTime();
     System sys;
     sys.SetStartTime(18000);
     sys.timestep = 1;
@@ -14,4 +19,8 @@ int main(){
         sys.Output();
         sys.Step();
     }
+    
+    end_time = getElapsedTime();
+    printf("Code took %lf seconds \n", end_time - start_time);
+    
 }
