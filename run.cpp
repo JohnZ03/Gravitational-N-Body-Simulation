@@ -15,6 +15,7 @@ int main(){
     sys.SetOutToFile("output.txt",1);
     endtime = 19000;
     steps = endtime/sys.timestep;
+    
     for(step=0;step<steps;step++){
         sys.Output();
         sys.Step();
