@@ -1,5 +1,5 @@
 #include "main.cpp"
-#include "hrtime.h"
+
 int step;
 long double steps, endtime;
 
@@ -7,13 +7,12 @@ int main(){
     
     double start_time, end_time;
     
-    start_time = getElapsedTime();
     System sys;
     sys.SetStartTime(18000);
-    sys.timestep = 1;
-    sys.LoadFile("burn_test.start");
-    sys.SetOutToFile("output.txt",1);
-    endtime = 19000;
+    sys.timestep = 10; //1
+    sys.LoadFile("results/solar_system.start");
+    sys.SetOutToFile("results/output_solar_system.csv",1);
+    endtime = 190000000000;
     steps = endtime/sys.timestep;
     
     for(step=0;step<steps;step++){
@@ -21,7 +20,7 @@ int main(){
         sys.Step();
     }
     
-    end_time = getElapsedTime();
+//end_time = getElapsedTime();
     printf("Code took %lf seconds \n", end_time - start_time);
     
 }

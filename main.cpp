@@ -21,13 +21,13 @@ long double add_mass, r_dot_v_relative, abs_r_rel, a_comp, a_dot_comp_1, a_dot_c
 string line, add_id, body_id, acting_id, burn_id, burn_body;
 int i, itts, time_counter;
 int burn_count = 0;
-pair<string, vector<long double>> burn_values, burn_values_next;
+pair<string, vector<long double> > burn_values, burn_values_next;
 
 class System
 {
 public:
-	map<string, vector<long double>> bodies, bodies_next;
-	map<string, pair<string, vector<long double>>> burns;
+	map<string, vector<long double> > bodies, bodies_next;
+	map<string, pair<string, vector<long double> > > burns;
 	long double accuracy, timestep, time, next_timestep;
 	int output_rate;
 	string info, debug_info;
@@ -150,7 +150,7 @@ public:
 			a.push_back(0);
 			a_dot.push_back(0);
 		}
-		for (std::pair<std::string, vector<long double>> body_itterator : bodies)
+		for (std::pair<std::string, vector<long double> > body_itterator : bodies)
 		{
 			acting_id = body_itterator.first;
 			if (acting_id != body_id)
@@ -188,7 +188,7 @@ public:
 		// TODO: Swap round looking at body id first with looking at time
 		if (burns.size() > 0)
 		{
-			for (pair<string, pair<string, vector<long double>>> burn_itt : burns)
+			for (pair<string, pair<string, vector<long double> > > burn_itt : burns)
 			{
 				burn_id = burn_itt.first;
 				burn_values = burn_itt.second;
@@ -233,7 +233,7 @@ public:
 	void InitiliseTimestep()
 	{
 		timestep = 999999;
-		for (std::pair<std::string, vector<long double>> body_itterator : bodies)
+		for (std::pair<std::string, vector<long double> > body_itterator : bodies)
 		{
 			body_id = body_itterator.first;
 			body_values = body_itterator.second;
@@ -260,7 +260,7 @@ public:
 				a_i.push_back(accel_output.at(i));
 				a_i_dot.push_back(accel_output.at(3 + i));
 			}
-			for (std::pair<std::string, vector<long double>> body_itterator : bodies)
+			for (std::pair<std::string, vector<long double> > body_itterator : bodies)
 			{
 				acting_id = body_itterator.first;
 				if (acting_id != body_id)
@@ -351,7 +351,7 @@ public:
 	{
 		bodies_next.clear();
 		next_timestep = 9999999999;
-		for (std::pair<std::string, vector<long double>> body_itterator : bodies)
+		for (std::pair<std::string, vector<long double> > body_itterator : bodies)
 		{
 			body_id = body_itterator.first;
 			body_values = body_itterator.second;
@@ -441,7 +441,7 @@ public:
 		if (time_counter == output_rate)
 		{
 			cout << "#" + to_string(time) + "\n";
-			for (std::pair<std::string, vector<long double>> body_itterator : bodies)
+			for (std::pair<std::string, vector<long double> > body_itterator : bodies)
 			{
 				body_id = body_itterator.first;
 				body_values = body_itterator.second;

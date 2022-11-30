@@ -71,3 +71,6 @@ The data showing this is included in the Accuracy Test section but is very poorl
 - Make draw.py have animation option
 - Add other forces like solar winds
 
+
+
+g++ -o run run.cpp
