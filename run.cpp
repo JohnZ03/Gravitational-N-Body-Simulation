@@ -7,14 +7,16 @@ long double steps, endtime;
 int main(){
     //g++ -o run run.cpp
     double start_time, end_time;
-    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     printf("Program is running .... \n");
+    
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     System sys;
     sys.SetStartTime(18000);
-    sys.timestep = 10; //1
-    sys.LoadFile("results/solar_system.start");
-    sys.SetOutToFile("results/output_solar_system.csv",1);
-    endtime = 190000;
+    sys.timestep = 1; //1
+    sys.LoadFile("results/full_solar_system.start");
+    sys.SetOutToFile("results/output_full_solar_system_seq_long.csv",1);
+    //endtime = 19000;
+    endtime = 28000;
     steps = endtime/sys.timestep;
     
     for(step=0;step<steps;step++){
