@@ -8,8 +8,12 @@
 #include <fstream>
 #include <exception>
 #include <sstream>
+#if defined _OPENMP
+#include <omp.h>
+#endif
 
 using namespace std;
+
 
 const long double G = 6.6743015e-11, PI = 3.1415926535898;
 vector<long double> add_init_position, add_init_velocity, body_values, output_vec, r_rel, v_rel, acting_values, a, a_dot, body_final,
@@ -52,10 +56,9 @@ public:
 		for (i = 0; i < init_position.size(); i++)
 		{
 			bodies[id].push_back(init_position.at(i));
-		}
-
-		for (i = 0; i < init_velocity.size(); i++)
-		{
+		//}
+		//for (i = 0; i < init_velocity.size(); i++)
+		//{
 			bodies[id].push_back(init_velocity.at(i));
 		}
 	}
@@ -69,9 +72,9 @@ public:
 		for (i = 0; i < 3; i++)
 		{
 			burn_vector.push_back(orientation.at(i));
-		}
-		for (i = 0; i < 3; i++)
-		{
+		//}
+		//for (i = 0; i < 3; i++)
+		//{
 			burn_vector.push_back(orientation_rate.at(i));
 		}
 		burns[burn_id] = make_pair(body_id, burn_vector);
@@ -150,6 +153,10 @@ public:
 			a.push_back(0);
 			a_dot.push_back(0);
 		}
+        
+        #pragma omp parallel for num_threads(32)
+        //#pragma omp parallel for if (N > maxNbodyOpenMp) default(none) shared() \
+        private(aperiodic, r_rel, dr_corr, r_dot_v_relative, abs_r_rel, v_rel, a_comp, a_dot_comp_1, a_dot_comp_2, a, a_dot)
 		for (std::pair<std::string, vector<long double>> body_itterator : bodies)
 		{
 			acting_id = body_itterator.first;
@@ -162,9 +169,9 @@ public:
 				for (i = 0; i < 3; i++)
 				{
 					r_rel.push_back(r.at(i) - acting_values.at(1 + i));
-				}
-				for (i = 0; i < 3; i++)
-				{
+				//}
+				//for (i = 0; i < 3; i++)
+				//{
 					v_rel.push_back(v.at(i) - acting_values.at(4 + i));
 				}
 				for (i = 0; i < 3; i++)
@@ -188,6 +195,8 @@ public:
 		// TODO: Swap round looking at body id first with looking at time
 		if (burns.size() > 0)
 		{
+            
+            
 			for (pair<string, pair<string, vector<long double>>> burn_itt : burns)
 			{
 				burn_id = burn_itt.first;
@@ -233,6 +242,11 @@ public:
 	void InitiliseTimestep()
 	{
 		timestep = 999999;
+        
+        
+        //#pragma omp parallel for shared(ewald, bodies, simbox, star) \
+        private(aperiodic, dr, dr_corr, drdt, drsqd, dv, invdrmag, potperiodic)
+        #pragma omp parallel for num_threads(32)
 		for (std::pair<std::string, vector<long double>> body_itterator : bodies)
 		{
 			body_id = body_itterator.first;
@@ -286,6 +300,8 @@ public:
 
 					r_rel.clear();
 					v_rel.clear();
+                    
+                    
 					for (i = 0; i < 3; i++)
 					{
 						r_rel.push_back(r_i.at(i) - r_j.at(i));
@@ -351,6 +367,11 @@ public:
 	{
 		bodies_next.clear();
 		next_timestep = 9999999999;
+        
+        
+        #pragma omp parallel for num_threads(32)
+        //#pragma omp parallel for shared() \
+        private( r_0, v_0, a_0, r_p, v_p, r_rel, v_rel, r_dot_v_relative, abs_r_rel, a_comp, a_dot_comp_1, a_dot_comp_2, a, a_dot)
 		for (std::pair<std::string, vector<long double>> body_itterator : bodies)
 		{
 			body_id = body_itterator.first;
@@ -378,7 +399,9 @@ public:
 			v_p.clear();
 			for (i = 0; i < 3; i++)
 			{
+                //equation 1 for r(predict)
 				r_p.push_back(r_0.at(i) + v_0.at(i) * timestep + 0.5 * a_0.at(i) * pow(timestep, 2) + (1 / 6) * a_0_dot.at(i) * pow(timestep, 3));
+                //equation 2 for v(predict)
 				v_p.push_back(v_0.at(i) + a_0.at(i) * timestep + 0.5 * a_0_dot.at(i) * pow(timestep, 2));
 			}
 
@@ -397,7 +420,9 @@ public:
 				v_p.clear();
 				for (i = 0; i < 3; i++)
 				{
+                    //equation 7 for v(corrected)
 					v_p.push_back(v_0.at(i) + 0.5 * (a_0.at(i) + a_p.at(i)) * timestep + (1 / 12) * (a_0_dot.at(i) - a_p_dot.at(i) * pow(timestep, 2)));
+                    //equation 8 for r(corrected)
 					r_p.push_back(r_0.at(i) + 0.5 * (v_p.at(i) + v_0.at(i)) * timestep + (1 / 12) * (a_0.at(i) - a_p.at(i)) * pow(timestep, 2));
 				}
 			}
