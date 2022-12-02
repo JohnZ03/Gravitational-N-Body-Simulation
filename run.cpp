@@ -1,4 +1,6 @@
-#include "main.cpp"
+#include "main_seq.cpp"
+#include "main_openmp.cpp"
+#include "main_cuda.cpp"
 #include <chrono>
 
 int step;
@@ -14,7 +16,7 @@ int main(){
     sys.SetStartTime(18000);
     sys.timestep = 1; //1
     sys.LoadFile("results/full_solar_system.start");
-    sys.SetOutToFile("results/output_full_solar_system_seq_long.csv",1);
+    sys.SetOutToFile("results/output_full_solar_system_openmp_long.csv",1);
     //endtime = 19000;
     endtime = 28000;
     steps = endtime/sys.timestep;
