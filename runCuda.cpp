@@ -1,4 +1,4 @@
-#include "main_cuda.cpp"
+#include "mainCuda.cpp"
 #include <chrono>
 
 int step;

@@ -1,4 +1,4 @@
-#include "main_openmp.cpp"
+#include "mainOmp.cpp"
 #include <chrono>
 
 int step;
