@@ -44,6 +44,7 @@ Alternatively, you can open plot.cpp and change the start file and output file a
 ```
 draw(<start file name>)
 ```
+
 ## Examples
 ### Earth Moon System
 The start file for the Earth Moon system and an example are included. This shows the movement around the barycentre and is a good example of two body motion with two significant masses.
@@ -73,4 +74,127 @@ The data showing this is included in the Accuracy Test section but is very poorl
 
 
 
+# Parallel Programming 
+
+Multicore and RAM 
+-the ECE Workstations Lab machines are named "ugNNN.eecg.utoronto.ca, and are
+        located in GB243 (ug132.eecg - ug180.eecg), GB251E (ug226.eecg -
+        ug249.eecg), SF2102 (ug201.eecg - ug225.eecg), and SF4102 (was SF2204)
+        (ug51.eecg - ug80.eecg).  The current door code is 16384.
+        Renovations in SF4102 are not yet complete so in-person use of that room is delayed.
+
+Use "ruptime -l" to find the least-used machines.
+
+
+
+All the machines in the range from ug51.eecg - ug80.eecg have Nvidia GPU
+cards installed.  But these are new machines, and we're having problems
+(due to a BIOS or X11 configuration issue) with the cards "disappearing",
+so you should check with the "nvidia-smi" command.
+
+There are also two new GPU-equipped server machines, ug252.eecg and
+ug253.eecg: please let me know if you try these, because I don't think
+anyone has tested them yet.
+
+
+
+
+
+
+
+
+#### SSH into computer
+```sh
+$ssh chenhsu2@ug54.eecg.toronto.edu 
+```
+
+```sh
+ug54:~% nvidia-smi
+Fri Dec  2 15:01:48 2022       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 470.141.03   Driver Version: 470.141.03   CUDA Version: 11.4     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA GeForce ...  On   | 00000000:01:00.0 Off |                  N/A |
+| 33%   29C    P8    16W / 220W |      1MiB /  7974MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+ug54:~% 
+
+```
+
+
+#### Copy myfile from your local computer to ugXXX 
+```sh
+
+git branch -a
+git clone -b openmp https://github.com/JohnZ03/Gravitational-N-Body-Simulation.git
+```
+
+The machines stats used for testing can be found by: 
+```sh
+wmic cpu get caption, deviceid, name, numberofcores, maxclockspeed, status
+
+lscpu
+
+
+```
+
+## Running the program
 g++ -o run run.cpp
+
+Testing against 9 bodies over long time 
+Testing against 9 bodies over short time 
+
+Testing against 2 bodies over short time 
+Testing against 2 bodies over long time 
+
+
+## To run the serial version
+```sh
+$ g++ -o run_seq run_seq.cpp
+$ ./run_seq
+```
+
+## To run the OpenMP version
+```sh
+$ g++ -o run_omp run_omp.cpp -fopenmp
+$ ./run_omp
+```
+
+## To run the CUDA version
+```sh
+$ nvcc -o run_cuda run_cuda.cu
+$ ./run_cuda
+```
+
+
+lscpu
+Model name:                      11th Gen Intel(R) Core(TM) i7-11700 @ 2.50GHz
+ug54:~/final/Gravitational-N-Body-Simulation% grep MemTotal /proc/meminfo
+MemTotal:       32621096 kB
+
+
+Timestamp                                 : Fri Dec  2 15:53:47 2022
+Driver Version                            : 470.141.03
+CUDA Version                              : 11.4
+
+Attached GPUs                             : 1
+GPU 00000000:01:00.0
+    Product Name                          : NVIDIA GeForce RTX 3070
+    Product Brand                         : GeForce
+FB Memory Usage
+        Total                             : 7974 MiB
+        Used                              : 1 MiB
+        Free                              : 7973 MiB
