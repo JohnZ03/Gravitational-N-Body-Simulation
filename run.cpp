@@ -1,6 +1,4 @@
-#include "main_seq.cpp"
-#include "main_openmp.cpp"
-#include "main_cuda.cpp"
+#include "main.cpp"
 #include <chrono>
 
 int step;
