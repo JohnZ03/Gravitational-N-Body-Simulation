@@ -165,12 +165,20 @@ Testing against 2 bodies over long time
 ```sh
 $ g++ -o run_seq run_seq.cpp
 $ ./run_seq
+
+
+ug54:~/final/Gravitational-N-Body-Simulation% g++ -o runSeq runSeq.cpp
+ug54:~/final/Gravitational-N-Body-Simulation% time ./runSeq
+
 ```
 
 ## To run the OpenMP version
 ```sh
 $ g++ -o run_omp run_omp.cpp -fopenmp
 $ ./run_omp
+
+g++ -o runOmp runOmp.cpp -fopenmp
+time ./runOmp
 ```
 
 ## To run the CUDA version
