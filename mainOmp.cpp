@@ -257,11 +257,11 @@ public:
         //#pragma omp parallel for shared(ewald, bodies, simbox, star) \
         private(aperiodic, dr, dr_corr, drdt, drsqd, dv, invdrmag, potperiodic)
        // #pragma omp parallel for num_threads(32)
-		for (std::pair<std::string, vector<long double>> body_itterator : bodies)
-        //for(int body_i = 0; body_i < bodies.size(); body_i++)
+		//for (std::pair<std::string, vector<long double>> body_itterator : bodies)
+        for(int body_i = 0; body_i < bodies.size(); body_i++)
 		{
-            body_id = body_itterator.first; //bodies[body_i].first;//
-            body_values = body_itterator.second; //bodies[body_i].second;//
+            body_id = bodyname[body_i];//body_itterator.first; //bodies[body_i].first;//
+            body_values = bodies[body_id];//body_itterator.second; //bodies[body_i].second;//
 			body_final.clear();
 
 			a_d_dot.clear();
@@ -389,12 +389,12 @@ public:
         private( r_0, v_0, a_0, r_p, v_p, r_rel, v_rel, r_dot_v_relative, abs_r_rel, a_comp, a_dot_comp_1, a_dot_comp_2, a, a_dot)
 		
         
-        std::string bodyname[bodies.size()];
-        int index = 0;
-        for (std::pair<std::string, vector<long double>> body_itterator : bodies){
-            bodyname[index] = body_itterator.first;
-            index++;
-        }
+        //std::string bodyname[bodies.size()];
+        //int index = 0;
+        //for (std::pair<std::string, vector<long double>> body_itterator : bodies){
+        //    bodyname[index] = body_itterator.first;
+        //    index++;
+        //}
         
         //for (std::pair<std::string, vector<long double>> body_itterator : bodies)
         for(int body_i = 0; body_i < bodies.size(); body_i++)
