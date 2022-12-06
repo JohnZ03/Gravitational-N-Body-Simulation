@@ -158,7 +158,7 @@ public:
 		//for (std::pair<std::string, vector<long double>> body_itterator : bodies)
         for(int body_i = 0; body_i < bodies.size(); body_i++)
 		{
-            acting_id = bodies.first;//body_itterator.first;//
+            acting_id = bodies[body_i];//body_itterator.first;//
             cout << "acting id" << acting_id << endl;
 			if (acting_id != body_id)
 			{
@@ -250,7 +250,7 @@ public:
 		//for (std::pair<std::string, vector<long double>> body_itterator : bodies)
         for(int body_i = 0; body_i < bodies.size(); body_i++)
 		{
-            body_id = bodies.first;//body_itterator.first; //
+            body_id = bodies[body_i].first;//body_itterator.first; //
             body_values = body_itterator.second; //bodies[body_i].second;//
 			body_final.clear();
 
@@ -281,7 +281,7 @@ public:
             for(int body_i = 0; body_i < bodies.size(); body_i++)
 			//for (std::pair<std::string, vector<long double>> body_itterator : bodies)
 			{
-                acting_id = bodies.first;//body_itterator.first; //
+                acting_id = bodies[body_i];//body_itterator.first; //
 				if (acting_id != body_id)
 				{
                     acting_values = body_itterator.second; //bodies[body_i].second;//body_itterator.second;
@@ -380,7 +380,7 @@ public:
 		//for (std::pair<std::string, vector<long double>> body_itterator : bodies)
         for(int body_i = 0; body_i < bodies.size(); body_i++)
 		{
-            body_id = bodies.first;//body_itterator.first; //
+            body_id = bodies[body_i];//body_itterator.first; //
             body_values = body_itterator.second; //bodies[body_i].second;//
 			body_final.clear();
 
@@ -475,7 +475,7 @@ public:
 			//for (std::pair<std::string, vector<long double>> body_itterator : bodies)
             for(int body_i = 0; body_i < bodies.size(); body_i++)
 			{
-                body_id = bodies.first;//body_itterator.first;//body_itterator.first;
+                body_id = bodies[body_i];//body_itterator.first;//body_itterator.first;
                 body_values = body_itterator.second;//bodies[body_i].second;//
 				cout << body_id;
 				for (i = 0; i < body_values.size(); i++)
