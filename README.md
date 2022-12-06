@@ -176,7 +176,7 @@ ug54:~/final/Gravitational-N-Body-Simulation% time ./runSeq
 ```sh
 $ g++ -o run_omp run_omp.cpp -fopenmp
 $ ./run_omp
-
+g++ -o runOmp -fopenmp runOmp.cpp
 g++ -o runOmp runOmp.cpp -fopenmp
 time ./runOmp
 ```

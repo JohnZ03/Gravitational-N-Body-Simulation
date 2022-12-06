@@ -154,9 +154,7 @@ public:
 			a_dot.push_back(0);
 		}
         
-        #pragma omp parallel for num_threads(32)
-        //#pragma omp parallel for if (N > maxNbodyOpenMp) default(none) shared() \
-        private(aperiodic, r_rel, dr_corr, r_dot_v_relative, abs_r_rel, v_rel, a_comp, a_dot_comp_1, a_dot_comp_2, a, a_dot)
+
 		for (std::pair<std::string, vector<long double>> body_itterator : bodies)
 		{
 			acting_id = body_itterator.first;
@@ -246,7 +244,7 @@ public:
         
         //#pragma omp parallel for shared(ewald, bodies, simbox, star) \
         private(aperiodic, dr, dr_corr, drdt, drsqd, dv, invdrmag, potperiodic)
-        #pragma omp parallel for num_threads(32)
+       // #pragma omp parallel for num_threads(32)
 		for (std::pair<std::string, vector<long double>> body_itterator : bodies)
 		{
 			body_id = body_itterator.first;
