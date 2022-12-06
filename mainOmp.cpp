@@ -470,13 +470,22 @@ public:
 	void Output()
 	{
 		if (time_counter == output_rate)
-		{
-			cout << "#" + to_string(time) + "\n";
-			//for (std::pair<std::string, vector<long double>> body_itterator : bodies)
+        {
+            cout << "#" + to_string(time) + "\n";
+            //std::pair<int , std::string> bodyname[bodies.size()];
+            std::string bodyname[bodies.size()];
+            int index = 0;
+            for (std::pair<std::string, vector<long double>> body_itterator : bodies){
+                
+                //bodyname[index].first = index;
+                bodyname[index] = body_itterator.first;
+                index++;
+                
+            }
             for(int body_i = 0; body_i < bodies.size(); body_i++)
 			{
-                body_id = bodies.at(body_i).first;//body_itterator.first;//body_itterator.first; //bodies[body_i];//
-                body_values = body_itterator.second;//bodies[body_i].second;//
+                body_id = bodyname[body_i]; //body_itterator.first;//bodies.at(body_i).first;//body_itterator.first; //bodies[body_i];//
+                body_values = bodies[body_id];//body_itterator.second;//bodies[body_i].second;//
 				cout << body_id;
 				for (i = 0; i < body_values.size(); i++)
 				{
