@@ -392,7 +392,7 @@ public:
         //for (std::pair<std::string, vector<long double>> body_itterator : bodies)
         for(int body_i = 0; body_i < bodies.size(); body_i++)
 		{
-            body_id = bodyname[body_i]//body_itterator.first;//body_itterator.first; ////
+            body_id = bodyname[body_i];//body_itterator.first;//body_itterator.first; ////
             body_values = bodies[body_id];//body_itterator.second; //bodies[body_i].second;//
 			body_final.clear();
 
