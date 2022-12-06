@@ -26,6 +26,7 @@ string line, add_id, body_id, acting_id, burn_id, burn_body;
 int i, itts, time_counter;
 int burn_count = 0;
 pair<string, vector<long double>> burn_values, burn_values_next;
+vector<string> bodyname;
 
 class System
 {
@@ -61,6 +62,9 @@ public:
 		{
 			bodies[id].push_back(init_velocity.at(i));
 		}
+        
+        bodyname.push_back(id);
+        
 	}
 	void AddBurn(string burn_id, string body_id, long double start_time, long double end_time, long double acceleration, vector<long double> orientation, vector<long double> orientation_rate)
 	{
@@ -154,12 +158,12 @@ public:
 			a_dot.push_back(0);
 		}
         
-        std::string bodyname[bodies.size()];
-        int index = 0;
-        for (std::pair<std::string, vector<long double>> body_itterator : bodies){
-            bodyname[index] = body_itterator.first;
-            index++;
-        }
+        //std::string bodyname[bodies.size()];
+        //int index = 0;
+        //for (std::pair<std::string, vector<long double>> body_itterator : bodies){
+        //    bodyname[index] = body_itterator.first;
+        //    index++;
+        //}
         
         //for (std::pair<std::string, vector<long double>> body_itterator : bodies)
         for(int body_i = 0; body_i < bodies.size(); body_i++)
@@ -488,15 +492,15 @@ public:
         {
             cout << "#" + to_string(time) + "\n";
             //std::pair<int , std::string> bodyname[bodies.size()];
-            std::string bodyname[bodies.size()];
-            int index = 0;
-            for (std::pair<std::string, vector<long double>> body_itterator : bodies){
+            //std::string bodyname[bodies.size()];
+            //int index = 0;
+            //for (std::pair<std::string, vector<long double>> body_itterator : bodies){
                 
                 //bodyname[index].first = index;
-                bodyname[index] = body_itterator.first;
-                index++;
+            //    bodyname[index] = body_itterator.first;
+            //    index++;
                 
-            }
+            //}
             
             
             for(int body_i = 0; body_i < bodies.size(); body_i++)
