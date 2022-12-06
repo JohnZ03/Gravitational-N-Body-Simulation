@@ -154,15 +154,21 @@ public:
 			a_dot.push_back(0);
 		}
         
-
-		for (std::pair<std::string, vector<long double>> body_itterator : bodies)
-        //for(int body_i = 0; body_i < bodies.size(); body_i++)
-		{
-            acting_id = body_itterator.first;//bodies[body_i];//
+        std::string bodyname[bodies.size()];
+        int index = 0;
+        for (std::pair<std::string, vector<long double>> body_itterator : bodies){
+            bodyname[index] = body_itterator.first;
+            index++;
+        }
+        
+        //for (std::pair<std::string, vector<long double>> body_itterator : bodies)
+        for(int body_i = 0; body_i < bodies.size(); body_i++)
+        {
+            acting_id = bodyname[body_i];//body_itterator.first;//bodies[body_i];//
             cout << "acting id" << acting_id << endl;
 			if (acting_id != body_id)
 			{
-                acting_values = body_itterator.second;//bodies[body_i].second;//
+                acting_values = bodies[body_id];//body_itterator.second;//bodies[body_i].second;//
 
 				r_rel.clear();
 				v_rel.clear();
@@ -382,15 +388,11 @@ public:
         std::string bodyname[bodies.size()];
         int index = 0;
         for (std::pair<std::string, vector<long double>> body_itterator : bodies){
-            
-            //bodyname[index].first = index;
             bodyname[index] = body_itterator.first;
             index++;
-            
         }
         
         //for (std::pair<std::string, vector<long double>> body_itterator : bodies)
-        //#pragma omp parallel for 
         for(int body_i = 0; body_i < bodies.size(); body_i++)
 		{
             body_id = bodyname[body_i];//body_itterator.first;//body_itterator.first; ////
