@@ -374,7 +374,7 @@ public:
 		next_timestep = 9999999999;
         
         
-        //#pragma omp parallel for num_threads(32)
+        #pragma omp parallel for num_threads(32)
         //#pragma omp parallel for shared() \
         private( r_0, v_0, a_0, r_p, v_p, r_rel, v_rel, r_dot_v_relative, abs_r_rel, a_comp, a_dot_comp_1, a_dot_comp_2, a, a_dot)
 		for (std::pair<std::string, vector<long double>> body_itterator : bodies)
