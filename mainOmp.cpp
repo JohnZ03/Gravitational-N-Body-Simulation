@@ -56,9 +56,9 @@ public:
 		for (i = 0; i < init_position.size(); i++)
 		{
 			bodies[id].push_back(init_position.at(i));
-		//}
-		//for (i = 0; i < init_velocity.size(); i++)
-		//{
+		}
+		for (i = 0; i < init_velocity.size(); i++)
+		{
 			bodies[id].push_back(init_velocity.at(i));
 		}
 	}
@@ -69,12 +69,12 @@ public:
 		burn_vector.push_back(start_time);
 		burn_vector.push_back(end_time);
 		burn_vector.push_back(acceleration);
-		for (i = 0; i < 3; i++)
+		for (i = 0; i < 3; i++) // push back x, y, z
 		{
 			burn_vector.push_back(orientation.at(i));
-		//}
-		//for (i = 0; i < 3; i++)
-		//{
+		}
+		for (i = 0; i < 3; i++) // push back x, y, z
+		{
 			burn_vector.push_back(orientation_rate.at(i));
 		}
 		burns[burn_id] = make_pair(body_id, burn_vector);
@@ -272,7 +272,11 @@ public:
 				a_i.push_back(accel_output.at(i));
 				a_i_dot.push_back(accel_output.at(3 + i));
 			}
-			for (std::pair<std::string, vector<long double>> body_itterator : bodies)
+            
+            
+            //pragma here
+            for(int body_i = 0; body_i < bodies.size(); body_i++)
+			//for (std::pair<std::string, vector<long double>> body_itterator : bodies)
 			{
 				acting_id = body_itterator.first;
 				if (acting_id != body_id)

@@ -170,6 +170,9 @@ $ ./run_seq
 ug54:~/final/Gravitational-N-Body-Simulation% g++ -o runSeq runSeq.cpp
 ug54:~/final/Gravitational-N-Body-Simulation% time ./runSeq
 
+6.411u 0.003s 0:06.58 97.4%    0+0k 0+34264io 0pf+0w
+6.444u 0.008s 0:06.62 97.2%    0+0k 0+34824io 0pf+0w
+
 ```
 
 ## To run the OpenMP version
