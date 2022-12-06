@@ -256,7 +256,7 @@ public:
         
         //#pragma omp parallel for shared(ewald, bodies, simbox, star) \
         private(aperiodic, dr, dr_corr, drdt, drsqd, dv, invdrmag, potperiodic)
-       // #pragma omp parallel for num_threads(32)
+        #pragma omp parallel for num_threads(32)
 		//for (std::pair<std::string, vector<long double>> body_itterator : bodies)
         for(int body_i = 0; body_i < bodies.size(); body_i++)
 		{
@@ -286,8 +286,7 @@ public:
 				a_i_dot.push_back(accel_output.at(3 + i));
 			}
             
-            
-            //pragma here
+ 
             //for(int body_i = 0; body_i < bodies.size(); body_i++)
 			for (std::pair<std::string, vector<long double>> body_itterator : bodies)
 			{
