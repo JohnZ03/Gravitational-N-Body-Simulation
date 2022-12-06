@@ -155,10 +155,10 @@ public:
 		}
         
 
-		//for (std::pair<std::string, vector<long double>> body_itterator : bodies)
-        for(int body_i = 0; body_i < bodies.size(); body_i++)
+		for (std::pair<std::string, vector<long double>> body_itterator : bodies)
+        //for(int body_i = 0; body_i < bodies.size(); body_i++)
 		{
-            acting_id = bodies[body_i];//body_itterator.first;//
+            acting_id = body_itterator.first;//bodies[body_i];//
             cout << "acting id" << acting_id << endl;
 			if (acting_id != body_id)
 			{
@@ -247,10 +247,10 @@ public:
         //#pragma omp parallel for shared(ewald, bodies, simbox, star) \
         private(aperiodic, dr, dr_corr, drdt, drsqd, dv, invdrmag, potperiodic)
        // #pragma omp parallel for num_threads(32)
-		//for (std::pair<std::string, vector<long double>> body_itterator : bodies)
-        for(int body_i = 0; body_i < bodies.size(); body_i++)
+		for (std::pair<std::string, vector<long double>> body_itterator : bodies)
+        //for(int body_i = 0; body_i < bodies.size(); body_i++)
 		{
-            body_id = bodies[body_i].first;//body_itterator.first; //
+            body_id = body_itterator.first; //bodies[body_i].first;//
             body_values = body_itterator.second; //bodies[body_i].second;//
 			body_final.clear();
 
@@ -278,10 +278,10 @@ public:
             
             
             //pragma here
-            for(int body_i = 0; body_i < bodies.size(); body_i++)
-			//for (std::pair<std::string, vector<long double>> body_itterator : bodies)
+            //for(int body_i = 0; body_i < bodies.size(); body_i++)
+			for (std::pair<std::string, vector<long double>> body_itterator : bodies)
 			{
-                acting_id = bodies[body_i];//body_itterator.first; //
+                acting_id = body_itterator.first; //bodies[body_i];//
 				if (acting_id != body_id)
 				{
                     acting_values = body_itterator.second; //bodies[body_i].second;//body_itterator.second;
@@ -377,10 +377,10 @@ public:
         //#pragma omp parallel for num_threads(32)
         //#pragma omp parallel for shared() \
         private( r_0, v_0, a_0, r_p, v_p, r_rel, v_rel, r_dot_v_relative, abs_r_rel, a_comp, a_dot_comp_1, a_dot_comp_2, a, a_dot)
-		//for (std::pair<std::string, vector<long double>> body_itterator : bodies)
-        for(int body_i = 0; body_i < bodies.size(); body_i++)
+		for (std::pair<std::string, vector<long double>> body_itterator : bodies)
+        //for(int body_i = 0; body_i < bodies.size(); body_i++)
 		{
-            body_id = bodies[body_i];//body_itterator.first; //
+            body_id = body_itterator.first; //bodies[body_i];//
             body_values = body_itterator.second; //bodies[body_i].second;//
 			body_final.clear();
 
@@ -472,10 +472,10 @@ public:
 		if (time_counter == output_rate)
 		{
 			cout << "#" + to_string(time) + "\n";
-			//for (std::pair<std::string, vector<long double>> body_itterator : bodies)
-            for(int body_i = 0; body_i < bodies.size(); body_i++)
+			for (std::pair<std::string, vector<long double>> body_itterator : bodies)
+            //for(int body_i = 0; body_i < bodies.size(); body_i++)
 			{
-                body_id = bodies[body_i];//body_itterator.first;//body_itterator.first;
+                body_id = body_itterator.first;//body_itterator.first; //bodies[body_i];//
                 body_values = body_itterator.second;//bodies[body_i].second;//
 				cout << body_id;
 				for (i = 0; i < body_values.size(); i++)
